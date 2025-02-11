@@ -1,0 +1,280 @@
+{
+  // Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+  // description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+  // is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+  // used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+  // Placeholders with the same ids are connected.
+  // Example:
+  // "Print to console": {
+  // 	"scope": "javascript,typescript",
+  // 	"prefix": "log",
+  // 	"body": [
+  // 		"console.log('$1');",
+  // 		"$2"
+  // 	],
+  // 	"description": "Log output to console"
+  // }
+  "save to file": {
+    "scope": "go",
+    "prefix": "save-file-write",
+    "body": [
+      "func saveToFile(filename string, data []byte) error {",
+      "\tif err := os.WriteFile(filename, data, 0644); err != nil {",
+      "\t\treturn err",
+      "\t}",
+      "\treturn nil",
+      "}"
+    ],
+    "description": "Save binary data to file"
+  },
+  "Test Cases Structure": {
+    "scope": "go",
+    "prefix": "testcases",
+    "body": [
+      "func Test${1:FunctionName}(t *testing.T) {",
+      "    testCases := []struct {",
+      "        desc         string",
+      "        line         []string",
+      "        expectedResp string",
+      "        expectedErr  string",
+      "    }{",
+      "        {",
+      "            desc:         \"base case 1\",",
+      "            expectedErr:  \"\",",
+      "        },",
+      "    }",
+      "",
+      "    for _, tc := range testCases {",
+      "        tc := tc",
+      "        t.Run(t.Name(), func(t *testing.T) {",
+      "            t.Log(tc.desc)",
+      "",
+      "            resp, err := myFunc(tc.line)",
+      "            if tc.expectedErr != \"\" {",
+      "                require.EqualError(t, err, tc.expectedErr)",
+      "            } else {",
+      "                require.NoError(t, err)",
+      "                require.Equal(t, tc.expectedResp, resp)",
+      "            }",
+      "",
+      "             resp := collapseArrToSizeM(tc.arr, tc.m)",
+      "             require.Equal(t, tc.expectedResp, resp)",
+      "        })",
+      "    }",
+      "}"
+    ],
+    "description": "Generate a Go test function with structured test cases and assertions"
+  },
+  "ISO format string time": {
+    "scope": "go",
+    "prefix": "iso-format-time",
+    "body": [
+      "const ISOFormat = \"2006-01-02T15:04:05Z\"",
+    ],
+    "description": "const for ISO date format"
+  },
+  "Check if key exists in map": {
+    "prefix": "mapCheck",
+    "body": [
+      "${1:mapName}, ${2:ok} := ${3:myMap}[${4:\"key\"}]",
+      "if !${2:ok} {",
+      "    ${5:// handle missing key}",
+      "}",
+      ""
+    ],
+    "description": "Template to check if a key exists in a Go map"
+  },
+  "Check if key exists in map with assignment": {
+    "prefix": "ifok",
+    "body": [
+      "if  _, ${1:ok} := ${2:mapVar}[${3:keyVar}]; !${1} {",
+      "\t${2}[${3}] = &${4:ValueType}{}",
+      "}",
+      ""
+    ],
+    "description": "Inserts an if statement to check if a key exists in a map and assigns a default value if it does not."
+  },
+  "Sort Slice using sort.Slice()": {
+    "prefix": "sort-slice",
+    "body": [
+      "sort.Slice(${1:mySlice}, func(i, j int) bool {",
+      "\treturn ${1}[i].${2:Field} < ${1}[j].${2:Field}",
+      "})",
+      ""
+    ],
+    "description": "Generates a sort.Slice() command with placeholders for the slice and comparison logic."
+  },
+  "Open File with os.Open() and defer Close": {
+    "prefix": "os-open",
+    "body": [
+      "${1:filename}, err := os.Open(\"${2:filepath}\")",
+      "if err != nil {",
+      "    ${3:log.Fatal(err)}",
+      "}",
+      "defer ${1}.Close()",
+      ""
+    ],
+    "description": "Opens a file using os.Open(), handles errors, and defers the file close."
+  },
+  "Read and print HTTP response body": {
+    "prefix": "read-resp-body",
+    "body": [
+        "body, err := io.ReadAll(resp.Body)",
+        "if err != nil {",
+        "    log.Fatal(err)",
+        "}",
+        "fmt.Println(string(body))"
+    ],
+    "description": "Read and print the body of an HTTP response"
+  },
+  "Read File Line by Line": {
+      "prefix": "read-file-bufio",
+      "body": [
+          "file, err := os.Open(\"${1:filename}\")",
+          "if err != nil {",
+          "\tlog.Fatal(err)",
+          "}",
+          "defer file.Close()",
+          "",
+          "scanner := bufio.NewScanner(file)",
+          "// read each line",
+          "for scanner.Scan() {",
+          "\tfmt.Println(scanner.Text())",
+          "}",
+          "",
+          "if err := scanner.Err(); err != nil {",
+          "\tlog.Fatal(err)",
+          "}"
+      ],
+      "description": "Read a file line by line in Go"
+  },
+  "Read JSON File and Unmarshal into Struct": {
+    "scope": "go",
+    "prefix": "read-json-file",
+    "body": [
+      "type ${1:DataType} struct {",
+      "    ${2:Field} ${3:string} `json:\"${4:field}\"`",
+      "    // Add more fields as needed",
+      "}",
+      "",
+      "func readJSONFile(filename string) ([]${1:DataType}, error) {",
+      "    data, err := os.ReadFile(filename)",
+      "    if err != nil {",
+      "        return nil, err",
+      "    }",
+      "    var items []${1:DataType}",
+      "    if err := json.Unmarshal(data, &items); err != nil {",
+      "        return nil, err",
+      "    }",
+      "    return items, nil",
+      "}"
+    ],
+    "description": "Read a JSON file and unmarshal its content into a struct"
+  },
+  "HTTP POST Request with JSON Body": {
+    "scope": "go",
+    "prefix": "http-post-json",
+    "body": [
+      "payload := ${1:map[string]interface{}{}}",
+      "// Fill in payload data",
+      "",
+      "jsonData, err := json.Marshal(payload)",
+      "if err != nil {",
+      "    log.Fatal(err)",
+      "}",
+      "",
+      "req, err := http.NewRequest(\"POST\", \"${2:https://api.example.com/endpoint}\", bytes.NewBuffer(jsonData))",
+      "if err != nil {",
+      "    log.Fatal(err)",
+      "}",
+      "req.Header.Set(\"Content-Type\", \"application/json\")",
+      "",
+      "client := &http.Client{}",
+      "resp, err := client.Do(req)",
+      "if err != nil {",
+      "    log.Fatal(err)",
+      "}",
+      "defer resp.Body.Close()",
+      "",
+      "// Read response",
+      "body, err := io.ReadAll(resp.Body)",
+      "if err != nil {",
+      "    log.Fatal(err)",
+      "}",
+      "fmt.Println(string(body))"
+    ],
+    "description": "Make an HTTP POST request with a JSON body and read the response"
+  },
+  "Save HTTP Response Body to File": {
+    "scope": "go",
+    "prefix": "save-http-response",
+    "body": [
+      "resp, err := http.Get(\"${1:https://example.com/image.png}\")",
+      "if err != nil {",
+      "    log.Fatal(err)",
+      "}",
+      "defer resp.Body.Close()",
+      "",
+      "file, err := os.Create(\"${2:output.png}\")",
+      "if err != nil {",
+      "    log.Fatal(err)",
+      "}",
+      "defer file.Close()",
+      "",
+      "_, err = io.Copy(file, resp.Body)",
+      "if err != nil {",
+      "    log.Fatal(err)",
+      "}",
+      ""
+    ],
+    "description": "Save the body of an HTTP response to a file"
+  },
+  "Custom HTTP Client with Timeout": {
+    "scope": "go",
+    "prefix": "http-client-timeout",
+    "body": [
+      "client := &http.Client{",
+      "    Timeout: ${1:10} * time.Second,",
+      "}",
+      "",
+      "resp, err := client.Do(${2:req})",
+      "if err != nil {",
+      "    log.Fatal(err)",
+      "}",
+      "defer resp.Body.Close()",
+      ""
+    ],
+    "description": "Create an HTTP client with a custom timeout"
+  },
+  "Encode URL Parameters": {
+    "scope": "go",
+    "prefix": "encode-url-params",
+    "body": [
+      "params := url.Values{}",
+      "params.Add(\"${1:key}\", \"${2:value}\")",
+      "// Add more parameters as needed",
+      "",
+      "url := \"${3:https://api.example.com/endpoint}?\" + params.Encode()",
+      ""
+    ],
+    "description": "Encode URL parameters for an HTTP request"
+  },
+  "Unmarshal JSON Response into Struct": {
+    "scope": "go",
+    "prefix": "unmarshal-json-response",
+    "body": [
+      "type ${1:ResponseType} struct {",
+      "    ${2:Field} ${3:string} `json:\"${4:field}\"`",
+      "    // Add more fields as needed",
+      "}",
+      "",
+      "var result ${1:ResponseType}",
+      "if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {",
+      "    log.Fatal(err)",
+      "}",
+      ""
+    ],
+    "description": "Unmarshal a JSON response body into a struct"
+  }
+}

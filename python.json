@@ -1,0 +1,620 @@
+{
+	"Function Definition": {
+		"prefix": "defn",
+		"body": [
+			"def ${1:func_name}(${2:args}) -> ${3:return_type}:",
+			"    \"\"\"${4:docstring}\"\"\"",
+			"    ${0:pass}"
+		],
+		"description": "Create a Python function with a docstring and return type"
+	},
+	"Main Block": {
+		"prefix": "main",
+		"body": [
+			"if __name__ == '__main__':",
+			"    ${1:main}()"
+		],
+		"description": "Main guard block to run the main function"
+	},
+	"Class Definition": {
+		"prefix": "classdef",
+		"body": [
+			"class ${1:ClassName}:",
+			"    def __init__(self, ${2:args}) -> None:",
+			"        ${3:pass}",
+			"",
+			"    ${0:pass}"
+		],
+		"description": "Create a Python class with an initializer (with type hints)"
+	},
+	"For Loop": {
+		"prefix": "for",
+		"body": [
+			"for ${1:item} in ${2:iterable}:",
+			"    ${0:pass}"
+		],
+		"description": "Standard for loop iteration"
+	},
+	"Try-Except Block": {
+		"prefix": "try",
+		"body": [
+			"try:",
+			"    ${1:pass}",
+			"except ${2:Exception} as ${3:e}:",
+			"    ${0:pass}"
+		],
+		"description": "Wrap code in a try-except block"
+	},
+	"List Comprehension": {
+		"prefix": "lc",
+		"body": [
+			"[${1:expression} for ${2:item} in ${3:iterable} if ${4:condition}]"
+		],
+		"description": "Quick list comprehension"
+	},
+	"Binary Search": {
+		"prefix": "bsearch",
+		"body": [
+			"def binary_search(arr: list[int], target: int) -> int:",
+			"    left, right = 0, len(arr) - 1",
+			"    while left <= right:",
+			"        mid = left + (right - left) // 2",
+			"        if arr[mid] == target:",
+			"            return mid",
+			"        elif arr[mid] < target:",
+			"            left = mid + 1",
+			"        else:",
+			"            right = mid - 1",
+			"    return -1"
+		],
+		"description": "Binary search algorithm implementation with type hints"
+	},
+	"Read File": {
+		"prefix": "readfile",
+		"body": [
+			"def read_file(file_path: str) -> str:",
+			"    \"\"\"Return the entire content of the file.\"\"\"",
+			"    with open(file_path, 'r') as f:",
+			"        return f.read()"
+		],
+		"description": "Read entire file content with type annotations"
+	},
+	"Write File": {
+		"prefix": "writefile",
+		"body": [
+			"def write_file(file_path: str, content: str) -> None:",
+			"    \"\"\"Write content to the specified file.\"\"\"",
+			"    with open(file_path, 'w') as f:",
+			"        f.write(content)"
+		],
+		"description": "Write content to a file with type annotations"
+	},
+	"Load JSON from a file": {
+		"prefix": "jsonload",
+		"body": [
+			"import json",
+			"from typing import Any",
+			"",
+			"def load_json(file_path: str) -> Any:",
+			"    \"\"\"Load and return JSON data from a file.\"\"\"",
+			"    with open(file_path, 'r') as f:",
+			"        return json.load(f)"
+		],
+		"description": "Load JSON data from a file with type annotations"
+	},
+	"Dump JSON to a file": {
+		"prefix": "jsondump",
+		"body": [
+			"import json",
+			"from typing import Any",
+			"",
+			"def dump_json(data: Any, file_path: str) -> None:",
+			"    \"\"\"Dump JSON data to a file with indentation.\"\"\"",
+			"    with open(file_path, 'w') as f:",
+			"        json.dump(data, f, indent=4)"
+		],
+		"description": "Dump JSON data to a file with type annotations"
+	},
+	"Read Lines Generator": {
+		"prefix": "readlinesgen",
+		"body": [
+			"from typing import Iterator",
+			"",
+			"def read_lines(file_path: str) -> Iterator[str]:",
+			"    \"\"\"Yield lines from the file one by one.\"\"\"",
+			"    with open(file_path, 'r') as f:",
+			"        for line in f:",
+			"            yield line.rstrip('\\n')"
+		],
+		"description": "Read file lines one at a time using a generator with type annotations"
+	},
+	"Read All Lines": {
+		"prefix": "readalllines",
+		"body": [
+			"def read_all_lines(file_path: str) -> list[str]:",
+			"    \"\"\"Return all lines from the file as a list.\"\"\"",
+			"    with open(file_path, 'r') as f:",
+			"        return f.readlines()"
+		],
+		"description": "Read all file lines into a list with type annotations"
+	},
+	"JSON loads from string": {
+		"prefix": "jsonloads",
+		"body": [
+			"import json",
+			"from typing import Any",
+			"",
+			"def json_loads(json_string: str) -> Any:",
+			"    \"\"\"Parse a JSON string and return the corresponding Python object.\"\"\"",
+			"    return json.loads(json_string)"
+		],
+		"description": "Parse JSON string using json.loads with type annotations"
+	},
+	"JSON dumps to string": {
+		"prefix": "jsondumps",
+		"body": [
+			"import json",
+			"from typing import Any",
+			"",
+			"def json_dumps(data: Any, *, indent: int = 4) -> str:",
+			"    \"\"\"Serialize a Python object to a JSON formatted string with optional indentation.\"\"\"",
+			"    return json.dumps(data, indent=indent)"
+		],
+		"description": "Serialize Python object to JSON string using json.dumps with type annotations"
+	},
+	"BFS in Graph": {
+		"prefix": "bfs",
+		"body": [
+			"from collections import deque",
+			"",
+			"def bfs(graph: dict[int, list[int]], start: int) -> list[int]:",
+			"    \"\"\"Perform BFS on a graph (adjacency list) and return visited order.\"\"\"",
+			"    visited = []",
+			"    queue = deque([start])",
+			"    seen = {start}",
+			"    while queue:",
+			"        node = queue.popleft()",
+			"        visited.append(node)",
+			"        for neighbor in graph[node]:",
+			"            if neighbor not in seen:",
+			"                seen.add(neighbor)",
+			"                queue.append(neighbor)",
+			"    return visited"
+		],
+		"description": "BFS on a graph adjacency list"
+	},
+	"DFS in Graph": {
+		"prefix": "dfs",
+		"body": [
+			"def dfs(graph: dict[int, list[int]], start: int, visited=None) -> list[int]:",
+			"    \"\"\"Recursive DFS on a graph (adjacency list) returning visited order.\"\"\"",
+			"    if visited is None:",
+			"        visited = []",
+			"    visited.append(start)",
+			"    for neighbor in graph[start]:",
+			"        if neighbor not in visited:",
+			"            dfs(graph, neighbor, visited)",
+			"    return visited"
+		],
+		"description": "Recursive DFS on a graph adjacency list"
+	},
+	"NamedTuple Example": {
+		"prefix": "namedtuple",
+		"body": [
+			"from typing import NamedTuple",
+			"",
+			"class ${1:Data}(NamedTuple):",
+			"    ${2:field1}: int",
+			"    ${3:field2}: str"
+		],
+		"description": "Create a simple NamedTuple with typed fields"
+	},
+	"Dataclass Example": {
+		"prefix": "dataclass",
+		"body": [
+			"from dataclasses import dataclass",
+			"",
+			"@dataclass",
+			"class ${1:MyData}:",
+			"    ${2:field1}: int",
+			"    ${3:field2}: str"
+		],
+		"description": "Define a Python dataclass"
+	},
+	"Property Example": {
+		"prefix": "prop",
+		"body": [
+			"class ${1:MyClass}:",
+			"    def __init__(self, ${2:value}):",
+			"        self._${2:value} = ${2:value}",
+			"",
+			"    @property",
+			"    def ${2:value}(self) -> int:",
+			"        \"\"\"Get the value.\"\"\"",
+			"        return self._${2:value}",
+			"",
+			"    @${2:value}.setter",
+			"    def ${2:value}(self, new_value: int) -> None:",
+			"        \"\"\"Set the value.\"\"\"",
+			"        self._${2:value} = new_value"
+		],
+		"description": "Create a class property with getter and setter"
+	},
+	"UnitTest Case": {
+		"prefix": "unittest",
+		"body": [
+			"import unittest",
+			"",
+			"class ${1:TestSomething}(unittest.TestCase):",
+			"    def test_${2:function_name}(self):",
+			"        \"\"\"Test case description.\"\"\"",
+			"        result = ${2:function_name}(${3:args})",
+			"        self.assertEqual(result, ${4:expected})",
+			"",
+			"if __name__ == '__main__':",
+			"    unittest.main()"
+		],
+		"description": "Basic unittest structure in Python"
+	},
+	"Get Current Datetime": {
+		"prefix": "datetimenow",
+		"body": [
+			"import datetime",
+			"",
+			"def get_current_datetime() -> datetime.datetime:",
+			"    \"\"\"Return the current local datetime.\"\"\"",
+			"    return datetime.datetime.now()"
+		],
+		"description": "Get the current local datetime"
+	},
+	"Parse Datetime from String": {
+		"prefix": "datetimeparse",
+		"body": [
+			"import datetime",
+			"",
+			"def parse_datetime(dt_string: str, fmt: str = '%Y-%m-%d %H:%M:%S') -> datetime.datetime:",
+			"    \"\"\"Parse a datetime string according to a given format.\"\"\"",
+			"    return datetime.datetime.strptime(dt_string, fmt)"
+		],
+		"description": "Convert datetime string into a datetime object"
+	},
+	"Format Datetime to String": {
+		"prefix": "datetimeformat",
+		"body": [
+			"import datetime",
+			"",
+			"def format_datetime(dt: datetime.datetime, fmt: str = '%Y-%m-%d %H:%M:%S') -> str:",
+			"    \"\"\"Format a datetime object as a string according to a given format.\"\"\"",
+			"    return dt.strftime(fmt)"
+		],
+		"description": "Format a datetime object into a string"
+	},
+	"Time Delta Example": {
+		"prefix": "timedelta",
+		"body": [
+			"import datetime",
+			"",
+			"def time_delta_example(days: int = 1) -> datetime.datetime:",
+			"    \"\"\"Return current time plus given days.\"\"\"",
+			"    return datetime.datetime.now() + datetime.timedelta(days=days)"
+		],
+		"description": "Basic usage of datetime.timedelta"
+	},
+	"CSV Reading": {
+		"prefix": "readcsv",
+		"body": [
+			"import csv",
+			"from typing import List, Dict",
+			"",
+			"def read_csv(file_path: str) -> List[Dict[str, str]]:",
+			"    \"\"\"Read a CSV file and return a list of dictionaries (header -> value).\"\"\"",
+			"    with open(file_path, 'r', newline='', encoding='utf-8') as f:",
+			"        reader = csv.DictReader(f)",
+			"        return list(reader)"
+		],
+		"description": "Read CSV into a list of dicts"
+	},
+	"CSV Writing": {
+		"prefix": "writecsv",
+		"body": [
+			"import csv",
+			"from typing import List, Dict",
+			"",
+			"def write_csv(file_path: str, data: List[Dict[str, str]]) -> None:",
+			"    \"\"\"Write a list of dictionaries to a CSV file.\"\"\"",
+			"    if not data:",
+			"        return",
+			"    fieldnames = data[0].keys()",
+			"    with open(file_path, 'w', newline='', encoding='utf-8') as f:",
+			"        writer = csv.DictWriter(f, fieldnames=fieldnames)",
+			"        writer.writeheader()",
+			"        writer.writerows(data)"
+		],
+		"description": "Write a list of dicts into a CSV file"
+	},
+	"Lambda Sort (Dictionary Key)": {
+		"prefix": "sortlambda",
+		"body": [
+			"items.sort(key=lambda x: x['${1:key}'])"
+		],
+		"description": "Sort a list of dictionaries by a specific key"
+	},
+	"Lambda Sort (Tuple Element)": {
+		"prefix": "sorttuplambda",
+		"body": [
+			"items.sort(key=lambda x: x[${1:index}])"
+		],
+		"description": "Sort a list of tuples by a specific index"
+	},
+	"Map with Lambda": {
+		"prefix": "maplambda",
+		"body": [
+			"transformed = list(map(lambda x: ${1:expression}, ${2:iterable}))"
+		],
+		"description": "Apply a lambda function to each element of an iterable"
+	},
+	"Filter with Lambda": {
+		"prefix": "filterlambda",
+		"body": [
+			"filtered = list(filter(lambda x: ${1:condition}, ${2:iterable}))"
+		],
+		"description": "Filter elements in an iterable based on a lambda condition"
+	},
+	"Reduce with Lambda": {
+		"prefix": "reducelambda",
+		"body": [
+			"from functools import reduce",
+			"",
+			"accumulated = reduce(lambda acc, x: ${1:expression}, ${2:iterable}, ${3:initial_value})"
+		],
+		"description": "Use functools.reduce with a lambda function to accumulate values"
+	},
+	"Basic Thread": {
+		"prefix": "threadbasic",
+		"body": [
+			"import threading",
+			"",
+			"def worker(num: int) -> None:",
+			"    print(f'Worker: {num}')",
+			"",
+			"thread = threading.Thread(target=worker, args=(1,))",
+			"thread.start()",
+			"thread.join()"
+		],
+		"description": "Basic usage of Python threading with a simple worker function."
+	},
+	"Lock with Threading": {
+		"prefix": "threadlock",
+		"body": [
+			"import threading",
+			"",
+			"lock = threading.Lock()",
+			"shared_resource = 0",
+			"",
+			"def safe_increment() -> None:",
+			"    global shared_resource",
+			"    with lock:",
+			"        shared_resource += 1"
+		],
+		"description": "Use threading.Lock to ensure thread-safe access to a shared resource."
+	},
+	"ThreadPoolExecutor": {
+		"prefix": "threadpool",
+		"body": [
+			"from concurrent.futures import ThreadPoolExecutor",
+			"",
+			"def worker(num: int) -> str:",
+			"    return f'Worker: {num}'",
+			"",
+			"with ThreadPoolExecutor(max_workers=4) as executor:",
+			"    futures = [executor.submit(worker, i) for i in range(5)]",
+			"    for f in futures:",
+			"        print(f.result())"
+		],
+		"description": "Use ThreadPoolExecutor for parallel tasks."
+	},
+	"Condition Variable": {
+		"prefix": "threadcond",
+		"body": [
+			"import threading",
+			"",
+			"condition = threading.Condition()",
+			"shared_data = 0",
+			"",
+			"def producer() -> None:",
+			"    global shared_data",
+			"    with condition:",
+			"        shared_data += 1",
+			"        condition.notify()",
+			"",
+			"def consumer() -> None:",
+			"    global shared_data",
+			"    with condition:",
+			"        condition.wait()",
+			"        print(f'Consumed: {shared_data}')"
+		],
+		"description": "Use a Condition to coordinate threads (producer-consumer example)."
+	},
+	"Semaphore Example": {
+		"prefix": "threadsem",
+		"body": [
+			"import threading",
+			"import time",
+			"",
+			"sem = threading.Semaphore(2)",
+			"",
+			"def task(identifier: int) -> None:",
+			"    with sem:",
+			"        print(f'Thread {identifier} acquired semaphore')",
+			"        time.sleep(1)",
+			"        print(f'Thread {identifier} releasing semaphore')"
+		],
+		"description": "Use a Semaphore to limit concurrent access to a resource."
+	},
+	"Regex Compile and Match": {
+		"prefix": "regexcompile",
+		"body": [
+			"import re",
+			"",
+			"pattern = re.compile(r'${1:pattern}')",
+			"match = pattern.match(${2:string_var})",
+			"if match:",
+			"    print('Match found:', match.group())"
+		],
+		"description": "Compile a regex pattern and match against a string"
+	},
+	"Regex Find All": {
+		"prefix": "regexfindall",
+		"body": [
+			"import re",
+			"",
+			"pattern = re.compile(r'${1:pattern}')",
+			"matches = pattern.findall(${2:string_var})",
+			"print(matches)"
+		],
+		"description": "Find all occurrences of a pattern in a string"
+	},
+	"Regex Substitute": {
+		"prefix": "regexsub",
+		"body": [
+			"import re",
+			"",
+			"pattern = re.compile(r'${1:pattern}')",
+			"replaced = pattern.sub('${2:replacement}', ${3:string_var})",
+			"print(replaced)"
+		],
+		"description": "Substitute parts of a string using a regex pattern"
+	},
+	"Socket Server": {
+		"prefix": "socketserver",
+		"body": [
+			"import socket",
+			"",
+			"def start_server(host: str = '127.0.0.1', port: int = 5000) -> None:",
+			"    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)",
+			"    server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)",
+			"    server.bind((host, port))",
+			"    server.listen()",
+			"    print(f'Server listening on {host}:{port}')",
+			"",
+			"    while True:",
+			"        conn, addr = server.accept()",
+			"        print(f'Connected by {addr}')",
+			"        data = conn.recv(1024)",
+			"        if not data:",
+			"            break",
+			"        conn.sendall(b'Hello, Client!')",
+			"        conn.close()"
+		],
+		"description": "Basic TCP socket server"
+	},
+	"Socket Client": {
+		"prefix": "socketclient",
+		"body": [
+			"import socket",
+			"",
+			"def connect_to_server(host: str = '127.0.0.1', port: int = 5000) -> None:",
+			"    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)",
+			"    server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)",
+			"    client_socket.connect((host, port))",
+			"    client_socket.sendall(b'Hello, Server!')",
+			"    data = client_socket.recv(1024)",
+			"    print(f'Received: {data}')",
+			"    client_socket.close()"
+		],
+		"description": "Basic TCP socket client"
+	},
+	"Threaded Socket Server": {
+		"prefix": "socketserverthreaded",
+		"body": [
+			"import socket",
+			"import threading",
+			"",
+			"def handle_client(conn: socket.socket, addr: tuple) -> None:",
+			"    print(f'New connection from {addr}')",
+			"    with conn:",
+			"        while True:",
+			"            data = conn.recv(1024)",
+			"            if not data:",
+			"                break",
+			"            conn.sendall(b'Hello, Threaded Client!')",
+			"",
+			"def start_threaded_server(host: str = '127.0.0.1', port: int = 5000) -> None:",
+			"    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)",
+			"    server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)",
+			"    server.bind((host, port))",
+			"    server.listen()",
+			"    print(f'Threaded server listening on {host}:{port}')",
+			"",
+			"    while True:",
+			"        conn, addr = server.accept()",
+			"        thread = threading.Thread(target=handle_client, args=(conn, addr))",
+			"        thread.start()"
+		],
+		"description": "TCP socket server using threads to handle multiple connections"
+	},
+	"UDP Socket Server": {
+		"prefix": "sockerserverudp",
+		"body": [
+			"import socket",
+			"",
+			"def start_udp_server(host: str = '127.0.0.1', port: int = 5000) -> None:",
+			"    server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)",
+			"    server.bind((host, port))",
+			"    print(f'UDP Server listening on {host}:{port}')",
+			"",
+			"    while True:",
+			"        data, addr = server.recvfrom(1024)",
+			"        if not data:",
+			"            break  # or just continue, depending on your needs",
+			"        print(f'Received {data} from {addr}')",
+			"        server.sendto(b'Hello, UDP Client!', addr)"
+		],
+		"description": "UDP server that listens for and responds to multiple messages."
+	},
+	"Min-Heap Initialization": {
+		"prefix": "heapmin",
+		"body": [
+			"import heapq",
+			"",
+			"def create_min_heap(data: list[int]) -> list[int]:",
+			"    \"\"\"Convert a list into a min-heap in-place.\"\"\"",
+			"    heapq.heapify(data)",
+			"    return data"
+		],
+		"description": "Heapify a list into a min-heap using heapq.heapify."
+	},
+	"Min-Heap Push/Pop": {
+		"prefix": "heappushpop",
+		"body": [
+			"import heapq",
+			"",
+			"def push_pop_example(heap: list[int], item: int) -> int:",
+			"    \"\"\"Push an item onto the heap, then pop the smallest item.\"\"\"",
+			"    heapq.heappush(heap, item)",
+			"    return heapq.heappop(heap)"
+		],
+		"description": "Push and pop from a min-heap."
+	},
+	"Max-Heap via Negation": {
+		"prefix": "heapmax",
+		"body": [
+			"import heapq",
+			"",
+			"def create_max_heap(data: list[int]) -> list[int]:",
+			"    \"\"\"Simulate a max-heap by negating elements, then heapify.\"\"\"",
+			"    neg_data = [-x for x in data]",
+			"    heapq.heapify(neg_data)",
+			"    return neg_data  # store as negated values",
+			"",
+			"def max_heappush(heap: list[int], item: int) -> None:",
+			"    \"\"\"Push a new item onto the max-heap (negated).\"\"\"",
+			"    heapq.heappush(heap, -item)",
+			"",
+			"def max_heappop(heap: list[int]) -> int:",
+			"    \"\"\"Pop the largest item by negating the popped value.\"\"\"",
+			"    return -heapq.heappop(heap)"
+		],
+		"description": "Create and use a max-heap by storing negated integers."
+	}
+}
